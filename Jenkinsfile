@@ -21,7 +21,7 @@ pipeline {
     }
      stage ('Copy webapp to Ansilbe Server') {
       steps {
-        sh "scp /var/lib/jenkins/workspace/Demo/webapp/target/webapp.war ec2-user@10.0.1.22:/home/ec2-user/Ansible/playbooks/roles/tomcat/files"
+        sh "scp /var/lib/jenkins/workspace/Demo/webapp/target/webapp.war ec2-user@10.0.1.22:/home/ec2-user/ansible/playbooks/roles/tomcat/files"
       }
     }
      stage ('Deploy webapp war files to Dev Server using Ansible Server') {
