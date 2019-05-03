@@ -24,9 +24,9 @@ pipeline {
         sh "scp /var/lib/jenkins/workspace/Demo/webapp/target/webapp.war ec2-user@10.0.1.22:/home/ec2-user/ansible/playbooks/roles/tomcat/files"
       }
     }
-     stage ('Deploy webapp war files to Dev Server using Ansible Server') {
+     stage ('Deploy webapp war files to Dev Server using ansible Server') {
       steps {
-        sh "ssh ec2-user@10.0.1.22 ansible-playbook -i ansible/playbooks/hosts ansible/playbooks/apache-tomcat.yml"
+        sh "sudo ssh ec2-user@10.0.1.22 ansible-playbook -i ansible/playbooks/hosts ansible/playbooks/apache-tomcat.yml"
       }
     }    
   }
