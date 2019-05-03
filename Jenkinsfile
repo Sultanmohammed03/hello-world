@@ -26,7 +26,7 @@ pipeline {
     }
      stage ('Deploy webapp war files to Dev Server using ansible Server') {
       steps {
-        sh "sudo ssh ec2-user@10.0.1.22 ansible-playbook -i ansible/playbooks/hosts ansible/playbooks/apache-tomcat.yml"
+        sh "ssh ec2-user@10.0.1.22 ansible-playbook -i ansible/playbooks/hosts ansible/playbooks/apache-tomcat.yml"
       }
     }    
   }
