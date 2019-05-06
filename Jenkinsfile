@@ -19,16 +19,16 @@ pipeline {
       nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'webapp/target/webapp.war', type: 'war']], credentialsId: 'nexus', groupId: 'Demo', nexusUrl: '54.91.35.9:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: '2.${BUILD_NUMBER}'
       }
     }
-    stage ('Creating Development Server Server') {
-      steps {
-        sh "ssh ec2-user@10.0.1.22 ansible-playbook /home/ec2-user/ansible/EC2/ec2.yml"
-      }
-    }
      stage ('Copy webapp to Ansilbe Server') {
       steps {
         sh "scp /var/lib/jenkins/workspace/Demo/webapp/target/webapp.war ec2-user@10.0.1.22:/home/ec2-user/ansible/playbooks/roles/tomcat/files"
       }
     }
+     stage ('Creating Development Server Server') {
+      steps {
+        sh "ssh ec2-user@10.0.1.22 ansible-playbook /home/ec2-user/ansible/EC2/ec2.yml"
+      }
+    }   
      stage ('Deploy webapp war files to Dev Server using ansible Server') {
       steps {
         sh "ssh ec2-user@10.0.1.22 ansible-playbook -i ansible/playbooks/hosts ansible/playbooks/apache-tomcat.yml"
